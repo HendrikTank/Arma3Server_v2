@@ -3,6 +3,10 @@
 Arma3Server_v2 is a lightweight, Docker-friendly Arma 3 dedicated server launcher.  
 It automates Arma 3 server startup, headless client orchestration, Steam Workshop mod downloads (via SteamCMD), optional DLC/install handling, logging, and resilient SteamCMD retries and backoff. The project is intended for run-in-container or host-based automated server deployments.
 
+## Getting Started
+
+**New users**: See [SETUP.md](SETUP.md) for a complete step-by-step setup guide with examples and troubleshooting.
+
 ## Key features
 - Build and launch Arma 3 dedicated server command line with configurable mods and server mods.
 - Orchestrate configurable number of headless clients (HCs), each with their own logger and log files.
