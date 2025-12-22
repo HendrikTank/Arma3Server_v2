@@ -60,12 +60,11 @@ Create the required directories on your host:
 mkdir -p ~/arma3-server/arma3
 mkdir -p ~/arma3-server/share/arma3/server-common
 mkdir -p ~/arma3-server/share/arma3/this-server
-mkdir -p ~/arma3-server/credentials
 ```
 
 ### 3. Create Steam Credentials File
 
-Create a file at `~/arma3-server/credentials/steam_credentials.json`:
+Create a file at `~/arma3-server/share/steam_credentials.json`:
 
 ```json
 {
@@ -76,7 +75,7 @@ Create a file at `~/arma3-server/credentials/steam_credentials.json`:
 
 **Important**: Keep this file secure! Consider using file permissions:
 ```bash
-chmod 600 ~/arma3-server/credentials/steam_credentials.json
+chmod 600 ~/arma3-server/share/steam_credentials.json
 ```
 
 ### 4. Set Up Server Configuration
@@ -160,7 +159,6 @@ docker run -d \
   -p 2306:2306/udp \
   -v ~/arma3-server/arma3:/arma3 \
   -v ~/arma3-server/share:/var/run/share \
-  -v ~/arma3-server/credentials:/var/run/share \
   -e ARMA_CONFIG_JSON=/var/run/share/steam_credentials.json \
   -e LOG_LEVEL=INFO \
   arma3server:latest
@@ -198,20 +196,20 @@ Host System:
 │   ├── mods/                   # Active mod symlinks
 │   ├── servermods/             # Active servermod symlinks
 │   └── mpmissions/             # Symlinked to this-server/mpmissions
-├── share/arma3/
-│   ├── server-common/          # Shared across all server instances
-│   │   ├── basic.cfg
-│   │   ├── dlcs/               # DLC directories
-│   │   └── mods/               # Shared mod storage
-│   └── this-server/            # Instance-specific files
-│       ├── config/
-│       │   ├── generated_a3server.cfg
-│       │   └── params.cfg
-│       ├── mods/               # Instance-specific mods
-│       ├── servermods/         # Instance-specific servermods
-│       └── mpmissions/         # Mission files
-└── credentials/
-    └── steam_credentials.json
+└── share/
+    ├── steam_credentials.json  # Steam credentials file
+    └── arma3/
+        ├── server-common/      # Shared across all server instances
+        │   ├── basic.cfg
+        │   ├── dlcs/           # DLC directories
+        │   └── mods/           # Shared mod storage
+        └── this-server/        # Instance-specific files
+            ├── config/
+            │   ├── generated_a3server.cfg
+            │   └── params.cfg
+            ├── mods/           # Instance-specific mods
+            ├── servermods/     # Instance-specific servermods
+            └── mpmissions/     # Mission files
 
 Container Paths:
 /arma3                          → ~/arma3-server/arma3
@@ -279,7 +277,6 @@ docker run -d \
   -p 2302:2302/udp \
   -v ~/arma3-server/arma3:/arma3 \
   -v ~/arma3-server/share:/var/run/share \
-  -v ~/arma3-server/credentials:/var/run/share \
   -e ARMA_CONFIG_JSON=/var/run/share/steam_credentials.json \
   -e LOG_LEVEL=DEBUG \
   -e LOG_JSON=true \
@@ -300,7 +297,6 @@ docker run -d \
   -p 2305:2305/udp \
   -v ~/arma3-server/arma3:/arma3 \
   -v ~/arma3-server/share:/var/run/share \
-  -v ~/arma3-server/credentials:/var/run/share \
   -e ARMA_CONFIG_JSON=/var/run/share/steam_credentials.json \
   arma3server:latest
 ```
@@ -529,7 +525,6 @@ services:
     volumes:
       - ./arma3:/arma3
       - ./share:/var/run/share
-      - ./credentials:/var/run/share
     environment:
       - ARMA_CONFIG_JSON=/var/run/share/steam_credentials.json
       - LOG_LEVEL=INFO
