@@ -42,34 +42,16 @@ It automates Arma 3 server startup, headless client orchestration, Steam Worksho
 8. SteamCMD invocations are guarded with pattern detection to treat certain outputs as transient (rate limits, "result 26", "Request revoked"), which triggers kill-and-retry behavior with exponential backoff. Optionally a lock-file can be used to serialize SteamCMD access across parallel launcher processes.
 
 ## Configuration
-Configuration may be supplied via environment variables or a JSON profile (see `launcher/example.json`). Important variables:
+Configuration may be supplied via environment variables. Important variables:
 - ARMA_BINARY – path to arma3 server binary (default: `/arma3/arma3server_x64`)
 - ARMA_CONFIG_JSON – path to steam credential JSON (default used in container)
 - HC_START_DELAY – seconds to wait between headless client starts (default `1`)
 - LOG_LEVEL – logging verbosity (`DEBUG`, `INFO`, `WARNING`, `ERROR`)
 - LOG_JSON – set `"true"` to use JSON formatted logs
 - STEAM_USER / STEAM_PASSWORD – fallback credentials if no credential JSON provided
-- headless_clients – number of headless clients to spawn (configured in JSON profile)
-- dlcs – optional list of appids (strings or objects) to ensure installed via SteamCMD
-- mods / servermods – mod lists or directories as configured in profile
-If "contact" is used, no other DLCs can be used. Any other DLC will switch to creator-branch.
+- HEADLESS_CLIENTS – number of headless clients to spawn (default `0`)
 
-Example JSON (snippet):
-```json
-{
-  "defaults": {
-    "dlcs": ["234586", {"appid":"654321"}]
-  },
-  "active": "production",
-  "profiles": {
-    "production": {
-      "headless_clients": 2,
-      "mods": ["@cba_a3", "@rhsusf"],
-      "servermods": ["@cba_a3"]
-    }
-  }
-}
-```
+Optional JSON configuration can be provided at `this-server/config/server.json` following the schema in `launcher/server_schema.json`.
 
 ## Running (Docker)
 A Dockerfile is included for containerized deployment. Typical run (adjust volumes and ports):
