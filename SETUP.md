@@ -248,7 +248,7 @@ docker run ... \
 
 ### Server Configuration
 
-The launcher uses a JSON schema-based configuration system. While the README mentions `launcher/example.json`, you primarily configure the server through:
+The launcher uses a configuration system based on environment variables and standard Arma 3 configuration files. You configure the server through:
 
 1. **Server.cfg** (`generated_a3server.cfg`): Standard Arma 3 server configuration
 2. **Basic.cfg**: Network and performance settings

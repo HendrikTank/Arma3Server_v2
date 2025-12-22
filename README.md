@@ -18,9 +18,7 @@ It automates Arma 3 server startup, headless client orchestration, Steam Worksho
 
 ## Project layout
 - `launcher/launcher.py` – CLI entry and orchestration.
-- `launcher/example.json` – example server profile / config (server.json schema reference).
 - `launcher/server_schema.json` – JSON schema used to validate server profiles.
-- `launcher/debug_mods.py` – helper utilities for mod debugging.
 - `launcher/arma_launcher/` – core implementation:
   - `server.py` – main ServerLauncher: builds launch command, starts server and HCs, streams logs.
   - `steam.py` – SteamCMD wrapper: downloads mods, installs apps/DLCs, retry logic, output parsing.
@@ -28,7 +26,7 @@ It automates Arma 3 server startup, headless client orchestration, Steam Worksho
   - `config.py` – configuration loader: environment + optional JSON profile, defaults and overrides.
   - `log.py` – centralized logging setup used by all modules.
   - `config_generator.py` – optional helper to create runtime configs (used by HC/server configs).
-  - `setup.py` – packaging / entry metadata (if used as library).
+  - `setup.py` – environment preparation for Arma 3 dedicated server.
 
 ## How it works (high level)
 1. Configuration is loaded from environment variables and optional JSON profile (defaults/active).
