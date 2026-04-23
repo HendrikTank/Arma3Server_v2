@@ -73,7 +73,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Run Trivy vulnerability scanner in repo mode
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.36.0
         with:
           scan-type: 'fs'
           ignore-unfixed: true
@@ -106,7 +106,7 @@ jobs:
           load: true
 
       - name: Run Trivy vulnerability scanner on built image
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.36.1
         with:
           image-ref: 'localbuild/testimage:latest'
           ignore-unfixed: true
