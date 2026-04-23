@@ -33,7 +33,7 @@ jobs:
 
       - name: Trivy scan (PRs report only)
         if: github.event_name == 'pull_request'
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: arma3server:ci
           format: table
@@ -42,7 +42,7 @@ jobs:
 
       - name: Trivy scan (scheduled/push fail if fixable)
         if: github.event_name != 'pull_request'
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: arma3server:ci
           format: table
